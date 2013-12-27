@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## To start the BTS, run:
-./osmo-bts-dirty/src/osmo-bts-trx/osmobts-trx \
+./osmo-bts/src/osmo-bts-trx/osmobts-trx \
   -c etc/bts.cfg -T -d DRSL:DOML:DLAPDM:DRLL:DRR:DMEAS:DPAG:DDSP:DABIS:DRTP:DPCU:DLOOP:DHO &
 
 # The complete list of possible debugs is:
