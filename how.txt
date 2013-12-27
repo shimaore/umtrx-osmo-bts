@@ -27,7 +27,7 @@ git clone https://github.com/fairwaves/osmo-trx.git
 
 git clone https://github.com/shimaore/osmo-bts.git
 # The main `make` will fail, this really _is_ broken.
-(cd osmo-bts-dirty && autoreconf -i && ./configure --with-uhd && make; cd src/osmo-bts-trx/ && make)
+(cd osmo-bts && autoreconf -i && ./configure --with-uhd && make; cd src/osmo-bts-trx/ && make)
 
 ## Transceiver52M uses the OpenBTS framework, so will access /etc/OpenBTS/OpenBTS.db
 echo 'Finish the installation with:'
