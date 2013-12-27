@@ -25,7 +25,7 @@ git clone https://github.com/fairwaves/osmo-trx.git
 # Note: This is _not_ the canonical OsmoCom code, however the current implementation of the BTS
 # code for UmTRX is broken so let's use this in the meantime.
 
-git clone https://github.com/shimaore/osmo-bts-dirty.git
+git clone https://github.com/shimaore/osmo-bts.git
 # The main `make` will fail, this really _is_ broken.
 (cd osmo-bts-dirty && autoreconf -i && ./configure --with-uhd && make; cd src/osmo-bts-trx/ && make)
 
