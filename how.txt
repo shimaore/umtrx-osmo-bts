@@ -1,8 +1,14 @@
 #!/bin/bash
 
-UMTRX_BASE="`pwd`"
+# Build operation for Debian packages on a Debian system.
 
-git clone https://github.com/fairwaves/UHD-Fairwaves.git
+# These instructions are similar to the ones on
+#   http://openbsc.osmocom.org/trac/wiki/network_from_scratch
+# and
+#   http://openbsc.osmocom.org/trac/wiki/OsmoTRX
+
+# Preparation: install the necessary packages.
+
 sudo aptitude install \
   autoconf libtool libosip2-dev libortp-dev g++ sqlite3 libsqlite3-dev libreadline6-dev libboost-all-dev \
   libusb-1.0.0-dev python-cheetah doxygen docutils \
@@ -10,6 +16,9 @@ sudo aptitude install \
 
 # Step 1: build the UHD library (and utilities)
 
+UMTRX_BASE="`pwd`"
+
+git clone https://github.com/fairwaves/UHD-Fairwaves.git
 (cd UHD-Fairwaves/host && mkdir build && cd build/ && cmake -DCMAKE_INSTALL_PREFIX=$UMTRX_BASE/uhd .. && make && make test && make install)
 
 export LD_LIBRARY_PATH="$UMTRX_BASE/uhd/lib"
@@ -18,18 +27,22 @@ export PKG_CONFIG_PATH="$UMTRX_BASE/uhd/lib/pkgconfig"
 # Step 2: build the Transceiver (the component that talks to the UmTRX on one side,
 #         and to osmo-bts on the other side).
 
-git clone https://github.com/fairwaves/osmo-trx.git
+# Slightly outdated:
+# git clone https://github.com/fairwaves/osmo-trx.git
+
+# Reference source:
+git clone http://cgit.osmocom.org/osmo-trx/
+
 (cd osmo-trx && autoreconf -i && ./configure --with-uhd && make)
 
 # Step 3: build the BTS code.
-# Note: This is _not_ the canonical OsmoCom code, however the current implementation of the BTS
-# code for UmTRX is broken so let's use this in the meantime.
 
-git clone https://github.com/shimaore/osmo-bts.git
-# You also need to clone openbsc because some header files are being retrieve there... urgh..
+# Reference source:
+git clone -b jolly/trx git://git.osmocom.org/osmo-bts.git
+
+# You also need to clone openbsc because some header files are being retrieved there.
 git clone git://git.osmocom.org/openbsc.git
 
-# The main `make` will fail, this really _is_ broken.
 (cd osmo-bts && autoreconf -i && ./configure --enable-trx && make)
 
 ## Transceiver52M uses the OpenBTS framework, so will access /etc/OpenBTS/OpenBTS.db
