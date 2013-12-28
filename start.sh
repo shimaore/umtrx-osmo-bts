@@ -9,7 +9,7 @@
 # The complete list of possible debugs is:
 #  DRSL:DOML:DLAPDM:DRLL:DRR:DMEAS:DPAG:DL1C:DL1P:DDSP:DABIS:DRTP:DPCU:DTRX:DLOOP:DHO
 # (it's defined in osmo-bts-dirty/src/common/logging.c)
-# Note: DL1C and DL1P are useful to add to debug radio-side issues. DTRX is too verbose.
+# Note: DL1C is useful to add to debug radio-side issues. DTRX and DL1P are too verbose.
 
 # The BTS will automatically try to connect to the transceiver.
 
