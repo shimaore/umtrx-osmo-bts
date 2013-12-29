@@ -41,7 +41,7 @@ git clone http://cgit.osmocom.org/osmo-trx/
 git clone -b jolly/trx git://git.osmocom.org/osmo-bts.git
 
 # You also need to clone openbsc because some header files are being retrieved there.
-git clone git://git.osmocom.org/openbsc.git
+git clone -b jolly/testing git://git.osmocom.org/openbsc.git
 
 (cd osmo-bts && autoreconf -i && ./configure --enable-trx && make)
 
