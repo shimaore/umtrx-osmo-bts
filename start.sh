@@ -16,6 +16,14 @@
 ## To start the transceiver, run _as root_:
 
 export LD_LIBRARY_PATH="`pwd`/uhd/lib"
+
+# This value will depend on your hardware, temperature, etc.
+# This is only a startup value though, UmTRX will adapt it.
+DAC=1950
+./umtrx_scripts/python_lib/umtrx_vcxo.py --dac-value=$DAC
+./umtrx_scripts/python_lib/umtrx_lms.py --lms-auto-calibration --lms 1
+./umtrx_scripts/python_lib/umtrx_lms.py --lms-auto-calibration --lms 2
+
 nice -19 ./osmo-trx/Transceiver52M/transceiver &
 
 # Note: running the transceiver as `root` is necessary, it will allow
